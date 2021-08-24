@@ -107,7 +107,11 @@ function getData() {
             datasets: [
                 {
                 label: 'Dataset 1',
-                data: [administered, people_partially_vaccinated, people_vaccinated, people_not_vaccinated, population],
+                data: [ population,
+                        people_not_vaccinated,
+                        administered,
+                        people_partially_vaccinated,
+                        people_vaccinated ],
                 backgroundColor: Object.values(CHART_COLORS),
                 }
             ]
