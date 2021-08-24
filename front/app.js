@@ -82,31 +82,78 @@ function getData() {
     .then(function (response) {
         return response.json();
     })
-    .then(function (data) {
+    .then(function (dataVaccine) {
         // Here put logic to parse data and get Vaccines chart
-        console.log(data);
+        //console.log(dataVaccine);
+        const { administered, people_partially_vaccinated, people_vaccinated, population } = dataVaccine.All;
+        let people_not_vaccinated = population*1 - people_partially_vaccinated*1 - people_vaccinated;
+         
+        const CHART_COLORS = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            blue: 'rgb(54, 162, 235)',
+            green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+           
+        const data = {
+            labels: [ 'Population',
+                      'People Not Vaccinated',
+                      'Administered',
+                      'People Partially Vaccined',
+                      'People Vaccinated' ],
+            datasets: [
+                {
+                label: 'Dataset 1',
+                data: [administered, people_partially_vaccinated, people_vaccinated, people_not_vaccinated, population],
+                backgroundColor: Object.values(CHART_COLORS),
+                }
+            ]
+        };
+     
+        const config = {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                            position: 'top',
+                    },
+                    title: {
+                            display: true,
+                            text: 'Vaccines COVID-19'
+                    }
+                }
+            },
+        };
+     
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        ); 
+        //---
     })
 }
 
 function addOptions() {
     let optionsList = '';
+    
+    let showSpinnerInitial = document.getElementById('show-spinner-initial');
+    showSpinnerInitial.classList.add('spinner-4');
+    setTimeout( () => showSpinnerInitial.classList.remove('spinner-4'), 700 );
 
-    let showSpinner = document.getElementById('show-spinner');
-    showSpinner.classList.add('spinner-4');
-    setTimeout( () => showSpinner.classList.remove('spinner-4'), 2500 );
-    
-    fetch('http://localhost:3000/hist?country=&status=Confirmed')
-    
-    .then(function (response) {
+    fetch('http://localhost:3000/hist?country=&status=Confirmed')    
+    .then( function (response) {
         return response.json();
     })
-    .then(function (data) {
+    .then( function (data) {
         const container = document.querySelector('#data-country')
-        
-        for (const [country] of Object.entries(data)) {
-        optionsList += `<option>${country}</option>`
+        for ( const [country] of Object.entries(data) ) {
+              optionsList += `<option>${country}</option>`
         }
-
         container.innerHTML += optionsList
     })
 }
