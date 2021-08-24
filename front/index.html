@@ -4,62 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../imagenes/logo-ucamp-dark.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">    
     <title>Stats COVID-19</title>
 </head>
 <!-- Here put into body event onload="initCharts()" -->
 <body>
-    <div class="container">
-        <main>
-            <header>
-                <h1 class="title">Using API: Covid-19-API</h1>
-                <br>
-            </header>
-            
-            <div class="main-content">
-                
-                <aside>
-                    <!-- Here put logo UCAMP
-                         If you use bootstrap maybe could you use "Single button" -->
-                         <div id="show-spinner-initial"></div>
-                    <ul>
-                        <li>
+        <!-- header -->
+        <section id="header">
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="../imagenes/logo-ucamp-dark.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                        &nbsp;Using API: Covid-19-API
+                    </a>
+                </div>
+            </nav>
+        </section>
+
+        <div class="main-content">
+            <div class="column is-one-fifth" id ="lista">
+                <ol>
+                    <div id="show-spinner-initial"></div>
+                    <li> 
+                        <div class="select">
+                            <select  id="data-country"></select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="select">
+                            <select  id="data-status">
+                                <option>recovered</option>
+                                <option>deaths</option>
+                                <option>confirmed</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li> 
+                        <div class="field">
+                            <label class="label">Initial:</label>
                             <div class="select">
-                                <select  id="data-country">
-                                </select>
+                                <form><input type ="date" class="date is outlined" id="data-initial-date" name="data-initial-date" required="required"> </form>
                             </div>
-                            
-                        </li>
-                        <li>
-                            <div class="select">
-                                <select  id="data-status">
-                                    <option>recovered</option>
-                                    <option>deaths</option>
-                                    <option>confirmed</option>
-                                </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="field">
+                            <label class="label">Final:</label>
+                            <div class="control">
+                                <div class="select">
+                                    <form><input type ="date" id="data-final-date" name="data-final-date" required="required"> </form>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <input type="date" class="input" id="data-initial-date" name="data-initial-date" placeholder="Initial Date">
-                        </li>
-                        <li>
-                            <input type="date" class="input" id="data-final-date" name="data-final-date" placeholder="Final Date">
-                        </li>
-                        <li>
-                            <button id="btn-search" class="button is-primary" onclick="getData()">Search</button>
-                            
-                            <div id="show-spinner"></div>
-                        </li>
-                    </ul>
-                    <!-- Here put footer with name of partners -->
-                </aside>
-                <div class="content">
-                    <canvas id="myChart"></canvas>
+                        </div>
+                    </li>
+                    <li>
+                        <p>  <button id="btn-search" class="btn btn-success" onclick="getData()">Search</button> </p> 
+                        <div id="show-spinner"></div>
+                    </li>
+                </ol>
+            </div>
+            <div class="column" id="chart1">
+                <div calss="contenedor">
+                    <div class="content">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div>
-        </main>
-    </div>
+            <div class="column" id="chart2">
+                <div calss="contenedor">
+                    <div class="content">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="column" id="chart3">
+                <div calss="contenedor">
+                    <div class="content">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>       
+        </div>
+        <footer class="page-footer font-small bg-dark text-light bg-dark">
+            <div class="footer-copyright text-center py-3">© 2021 TEAM 2:
+                <a href="#">Carolina Perez,</a>
+                <a href="#">Jorge Angel Novoa,</a>
+                <a href="#">Josè Antonio Salinas,</a>
+                <a href="#">Alberto Miranda Pacheco,</a>
+                <a href="#">Alan Abarca Velazquez,</a>
+                <a href="#">Itzel Ibañez Miranda,</a>
+                <a href="#">Omar Rodrigo Orozco,</a>
+                <a href="#">Martin Barrera,</a>
+                <a href="#">Gerardo Paxtian Torres,</a>
+                <a href="#">Raul Eduardo Trejo.</a>
+            </div>
+        </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
