@@ -69,22 +69,40 @@ function getData() {
                 dateList.push (`${nDate}`)
                 valueList.push (`${nValue}`)
             }
-      }
+        }
 
-      console.log(datesList)
+        console.log(datesList)
       
-      const graficaStatus = document.querySelector("#myChart2");
+        const graficaStatus = document.querySelector("#myChart2");
         const etiquetas = dateList;
         
         const defineStatus = {
-            label: status,
-            data: valueList,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
+                label: status.toUpperCase(),
+                data: valueList,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+                ],
+                //backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                //borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
         };
 
-        if (grafica2){
+        if ( grafica2 ) {
             grafica2.clear();
             grafica2.destroy();
         }
@@ -99,15 +117,17 @@ function getData() {
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    y :{
+                            beginAtZero: false
+                    }
+                    /*yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: false
                         }
-                    }],
+                    }],*/
                 },
             }
         });
-    
     })  
 
     // Chart of Vaccines per Country
@@ -124,25 +144,23 @@ function getData() {
          
         const CHART_COLORS = {
             red: 'rgb(255, 99, 132)',
-            orange: 'rgb(255, 159, 64)',
-            yellow: 'rgb(255, 205, 86)',
+            purple: 'rgb(153, 102, 255)',
             blue: 'rgb(54, 162, 235)',
             green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
-            purple: 'rgb(153, 102, 255)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
             grey: 'rgb(201, 203, 207)'
         };
            
         const data = {
-            labels: [ 'Population',
-                      'People Not Vaccinated',
+            labels: [ 'People Not Vaccinated',
                       'Administered',
                       'People Partially Vaccined',
                       'People Vaccinated' ],
             datasets: [
                 {
                 label: 'Dataset 1',
-                data: [ population,
-                        people_not_vaccinated,
+                data: [ people_not_vaccinated,
                         administered,
                         people_partially_vaccinated,
                         people_vaccinated ],
@@ -162,7 +180,8 @@ function getData() {
                     },
                     title: {
                             display: true,
-                            text: 'Vaccines COVID-19'
+                            text: `Vaccines COVID-19
+                             Population ${population}`
                     }
                 }
             },
