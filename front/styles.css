@@ -5,14 +5,18 @@ body {
   background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2); /* Chrome 10-25, Safari 5.1-6 
   background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 } 
+
 li{
+  text-align: left;
   list-style: none;
-   padding: 10px;
-  }
-  
+  padding: 5px;
+}
+
+
 h1{ 
   text-align: center;  
   text-decoration: #25b09b;
+  padding: 5px;
 }
 
 .spinner-4 {
