@@ -22,33 +22,14 @@ function initCharts() {
 // Function to get data and print charts
 function getData() {
     // get dat from all input elements
-    const inputFields = document.querySelectorAll('.input');
-    const inputList = document.getElementById('data-country').value;
-    // We need to check that all inputs have values, in other case add warnings and show alerts
+    const status = document.getElementById('data-status').value;
+    const country = document.getElementById('data-country').value;
 
+    
     // show spinner before load data 
     let showSpinner = document.getElementById('show-spinner');
     showSpinner.classList.add('spinner-4');
     setTimeout( () => showSpinner.classList.remove('spinner-4'), 2300 );
-
-    let country = '';
-    let status = '';
-    let initialDate = '';
-    let finalDate = '';
-
-    country = inputList;
-    
-    for ( const inputItem of inputFields ) {
-        if ( inputItem.name === 'data-status') {
-                  status = inputItem.value;
-        }
-        else if ( inputItem.name === 'data-initial-date') {
-                  initialDate = inputItem.value;
-        }
-        else if ( inputItem.name === 'data-final-date') {
-                  finalDate = inputItem.value;
-        }
-    }
 
     // Chart per Country
     console.log('http://localhost:3000/stats?country=' + country) 
@@ -68,13 +49,58 @@ function getData() {
 
     console.log('http://localhost:3000/hist?country=' + country+'&status='+ status); 
     fetch('http://localhost:3000/hist?country=' + country+'&status='+ status)
-    .then(function (response) {
+    .then( (response) => {
         return response.json();
     })
-    .then(function (data) {
-        // Here put logic to parse data and get first History
-        console.log(data);
-    })
+    .then(function (dataStatus) {
+        let datesList = dataStatus.All.dates;
+        let dateList= [];
+        let valueList= [];
+
+        let fInit = document.getElementById('data-initial-date').value;
+        let fFinal = document.getElementById('data-final-date').value;
+        
+        // Filtra solo las fechas indicadas
+        for ( const [nDate, nValue] of Object.entries(datesList) ) {
+            if (fInit <= `${nDate}` && fFinal>= `${nDate}`){
+                dateList.push (`${nDate}`)
+                valueList.push (`${nValue}`)
+            }
+      }
+
+      console.log(datesList)
+      
+      const graficaStatus = document.querySelector("#myChart2");
+        const etiquetas = dateList;
+        
+        const defineStatus = {
+            label: status,
+            data: valueList,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+        };
+
+        new Chart(graficaStatus, {
+            type: 'bar',// Tipo de gráfica
+            data: {
+                labels: etiquetas,
+                datasets: [
+                    defineStatus,
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                },
+            }
+        });
+    
+    })  
 
     // Chart of Vaccines per Country
     console.log('http://localhost:3000/vac?country=' + country);
@@ -162,5 +188,26 @@ function addOptions() {
     })
 }
 
+function dateFortmat() {
+    const tDate = new Date();
+    let dd = tDate.getDate();
+    let mm = tDate.getMonth() + 1;
+    const yyyy = tDate.getFullYear();
+
+    if(mm<=9) {
+        mm = "0" + mm
+    }
+    if(dd<=9) {
+        dd = "0" + dd
+    }
+    return yyyy + "-" + mm + "-" + dd
+}
+
+let fecha = dateFortmat()
+
+let dInitial = document.getElementById('data-initial-date');
+dInitial.value = fecha;
+let dFinal = document.getElementById('data-final-date');
+dFinal.value = fecha;
 addOptions();
 

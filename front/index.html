@@ -24,69 +24,75 @@
         </section>
 
         <div class="main-content">
-            <div class="column is-one-fifth" id ="lista">
-                <ol>
-                    <div id="show-spinner-initial"></div>
-                    <li> 
-                        <div class="select">
-                            <select  id="data-country"></select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="select">
-                            <select  id="data-status">
-                                <option>recovered</option>
-                                <option>deaths</option>
-                                <option>confirmed</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li> 
-                        <div class="field">
-                            <label class="label">Initial:</label>
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div id="show-spinner-initial"></div>
+                        <li> 
                             <div class="select">
-                                <form><input type ="date" class="date is outlined" id="data-initial-date" name="data-initial-date" required="required"> </form>
+                                <select  id="data-country"></select>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="field">
-                            <label class="label">Final:</label>
-                            <div class="control">
+                        </li>
+                        <li>
+                            <div class="select">
+                                <select  id="data-status">
+                                    <option>recovered</option>
+                                    <option>deaths</option>
+                                    <option>confirmed</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li> 
+                            <div class="field">
+                                <label class="label">Initial:</label>
                                 <div class="select">
-                                    <form><input type ="date" id="data-final-date" name="data-final-date" required="required"> </form>
+                                    <form><input type ="date" class="date is outlined" id="data-initial-date" name="data-initial-date" required="required"> </form>
                                 </div>
                             </div>
+                        </li>
+                        <li>
+                            <div class="field">
+                                <label class="label">Final:</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <form><input type ="date" id="data-final-date" name="data-final-date" required="required"> </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>  <button id="btn-search" class="btn btn-success" onclick="getData()">Search</button> </p> 
+                            <div id="show-spinner"></div>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col" id="chart1">
+                        <div calss="contenedor">
+                            <div class="content">
+                                <canvas id="myChart"></canvas>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <p>  <button id="btn-search" class="btn btn-success" onclick="getData()">Search</button> </p> 
-                        <div id="show-spinner"></div>
-                    </li>
-                </ol>
-            </div>
-            <div class="column" id="chart1">
-                <div calss="contenedor">
-                    <div class="content">
-                        <canvas id="myChart"></canvas>
                     </div>
+                    <div class="col" id="chart2">
+                        <div calss="contenedor">
+                            <div class="content">
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" id="chart3">
+                        <div calss="contenedor">
+                            <div class="content">
+                                <canvas id="myChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>       
                 </div>
             </div>
-            <div class="column" id="chart2">
-                <div calss="contenedor">
-                    <div class="content">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="column" id="chart3">
-                <div calss="contenedor">
-                    <div class="content">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-            </div>       
         </div>
+
         <footer class="page-footer font-small bg-dark text-light bg-dark">
             <div class="footer-copyright text-center py-3">© 2021 TEAM 2:
                 <a href="#">Carolina Perez,</a>
