@@ -1,3 +1,6 @@
+let grafica1;
+let grafica2;
+
 // This function could be used to get values for Country and Status drop list
 // Call this function with un event onload in html
 function initCharts() {
@@ -29,7 +32,7 @@ function getData() {
     // show spinner before load data 
     let showSpinner = document.getElementById('show-spinner');
     showSpinner.classList.add('spinner-4');
-    setTimeout( () => showSpinner.classList.remove('spinner-4'), 2300 );
+    setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );
 
     // Chart per Country
     console.log('http://localhost:3000/stats?country=' + country) 
@@ -81,7 +84,12 @@ function getData() {
             borderWidth: 1,
         };
 
-        new Chart(graficaStatus, {
+        if (grafica2){
+            grafica2.clear();
+            grafica2.destroy();
+        }
+        
+        grafica2 = new Chart(graficaStatus, {
             type: 'bar',// Tipo de gráfica
             data: {
                 labels: etiquetas,
@@ -159,8 +167,13 @@ function getData() {
                 }
             },
         };
+
+        if (grafica1){
+            grafica1.clear();
+            grafica1.destroy();
+        }
      
-        const myChart = new Chart(
+        grafica1 = new Chart(
             document.getElementById('myChart'),
             config
         ); 
