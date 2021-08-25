@@ -1,5 +1,6 @@
 let grafica1;
 let grafica2;
+let grafica3;
 
 // This function could be used to get values for Country and Status drop list
 // Call this function with un event onload in html
@@ -11,14 +12,14 @@ function initCharts() {
 
     // Query to get default values for Mexico
     const country = 'Mexico';
-    console.log('http://localhost:3000/stats?country=' + country) 
+    // console.log('http://localhost:3000/stats?country=' + country) 
     fetch('http://localhost:3000/stats?country=' + country)
     .then( (response) => {
         return response.json()
     })
     .then(function (data) {
         // Here put logic to parse data and return catalogs from Country and Status and fisrt chart
-        console.log(data)
+        
     })
 }
 
@@ -34,23 +35,14 @@ function getData() {
     showSpinner.classList.add('spinner-4');
     setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );
 
-    // Chart per Country
-    console.log('http://localhost:3000/stats?country=' + country) 
-    fetch('http://localhost:3000/stats?country=' + country)
-    .then( (response) => {
-        return response.json();
-    })
-    .then(function (data) {
-        // Here put logic to parse data and get first/Second Chart
-        console.log(data);
-    })
     
+
     // Chart by Country - Status - This chart should be used as History
     // Status Recovered was depreciated
     if ( status.length < 1 )
          status = 'Confirmed';
 
-    console.log('http://localhost:3000/hist?country=' + country+'&status='+ status); 
+    // console.log('http://localhost:3000/hist?country=' + country+'&status='+ status); 
     fetch('http://localhost:3000/hist?country=' + country+'&status='+ status)
     .then( (response) => {
         return response.json();
@@ -59,25 +51,24 @@ function getData() {
         let datesList = dataStatus.All.dates;
         let dateList= [];
         let valueList= [];
-
+    
         let fInit = document.getElementById('data-initial-date').value;
         let fFinal = document.getElementById('data-final-date').value;
         
         // Filtra solo las fechas indicadas
+        
         for ( const [nDate, nValue] of Object.entries(datesList) ) {
             if (fInit <= `${nDate}` && fFinal>= `${nDate}`){
                 dateList.push (`${nDate}`)
                 valueList.push (`${nValue}`)
             }
         }
-
-        console.log(datesList)
-      
+        
         const graficaStatus = document.querySelector("#myChart2");
         const etiquetas = dateList;
         
         const defineStatus = {
-                label: status.toUpperCase(),
+                label: status,
                 data: valueList,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -130,8 +121,119 @@ function getData() {
         });
     })  
 
+    // Chart per Country
+    // console.log('http://localhost:3000/stats?country=' + country) 
+    fetch('http://localhost:3000/stats?country=' + country)
+    .then( (response) => {
+        return response.json();
+    })
+    .then(function (dataHist) {
+        let stateList = [];
+        let recoveredList = [];
+        let confirmedList = [];
+        let deathsList = [];
+        
+        // Filtra solo las fechas indicadas
+        // console.log(dataHist)
+        for ( const [nState, nRecovered] of Object.entries(dataHist) ) {
+            if(`${nState}` !== 'All'){
+                stateList.push (`${nState}`)
+                recoveredList.push (`${nRecovered.recovered}`)
+                confirmedList.push (`${nRecovered.confirmed}`)
+                deathsList.push (`${nRecovered.deaths}`)
+            }
+        }
+
+        console.log('State ' + stateList)
+        console.log('Confirmed ' + confirmedList)
+        console.log('Deaths ' + deathsList)
+        console.log('Recovered ' + recoveredList)
+
+        const graficaStatus = document.querySelector("#myChart3");
+        const etiquetas = stateList;
+        
+        const defineStatus = {
+                label: status,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+                ],
+                //backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                //borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+        };
+
+        const CHART_COLORS = {
+            red: 'rgb(255, 99, 132)',
+            purple: 'rgb(153, 102, 255)',
+            blue: 'rgb(54, 162, 235)',
+            green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+        if ( grafica3 ) {
+            grafica3.clear();
+            grafica3.destroy();
+        }
+        
+        const data = {
+            labels: stateList,
+            datasets: [{
+                label: 'Confirmed',
+                backgroundColor: '#42a5f5',
+                borderColor: 'gray',
+                data:confirmedList,
+            },{
+                label: 'Recovered',
+                backgroundColor: 'green',
+                borderColor: 'green',
+                data: recoveredList,
+            },{
+                label: 'Deaths',
+                backgroundColor: '#ffab91',
+                borderColor: 'yellow',
+                data: deathsList,
+            }			
+            ]
+        };
+
+        grafica3 = new Chart(graficaStatus, {
+            type: 'bar',// Tipo de gráfica
+            data: data,
+            options: {
+                scales: {
+                    y :{
+                            beginAtZero: false
+                    }
+                    /*yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }],*/
+                },
+            }
+        });
+
+    })
+    
     // Chart of Vaccines per Country
-    console.log('http://localhost:3000/vac?country=' + country);
+    // console.log('http://localhost:3000/vac?country=' + country);
     fetch('http://localhost:3000/vac?country=' + country)
     .then(function (response) {
         return response.json();
