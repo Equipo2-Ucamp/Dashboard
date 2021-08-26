@@ -39,6 +39,7 @@ const urlVaccines = buildGetDataCOVID19( apiBaseUrl, apiUrl, 3 );
 // Define object params ; params is use for Coutry and Vaccines
 const params = {};
 const paramsHist = {};
+const paramsVaccines = {};
 
 // Print URL in order to verify url built
 console.log("Url = "+url);
@@ -91,11 +92,14 @@ app.get('/hist', async (req, res) => {
 
 // Function to get data from 'https://covid-api.mmediagroup.fr/v1/vaccines?country=Mexico'
 app.get('/vac', async (req, res) => {
+  const { country } = req.query
+  paramsVaccines.country = country;
+  
   try {
       const response = await axios({
         method: 'get',
         url: urlVaccines,
-        params
+        params: paramsVaccines
       }).then( (result) => {
         return result.data
       }).catch( (err) => {

@@ -1,41 +1,17 @@
-let grafica1;
-let grafica2;
-let grafica3;
-
-// This function could be used to get values for Country and Status drop list
-// Call this function with un event onload in html
-function initCharts() {
-    // Show spinner before load data
-    let showSpinner = document.getElementById('show-spinner');
-    showSpinner.classList.add('spinner-4');
-    setTimeout( () => showSpinner.classList.remove('spinner-4'), 2300 );
-
-    // Query to get default values for Mexico
-    const country = 'Mexico';
-    // console.log('http://localhost:3000/stats?country=' + country) 
-    fetch('http://localhost:3000/stats?country=' + country)
-    .then( (response) => {
-        return response.json()
-    })
-    .then(function (data) {
-        // Here put logic to parse data and return catalogs from Country and Status and fisrt chart
-        
-    })
-}
+let firstChart = '';
+let secondChart = '';
+let thirdChart = '';
 
 // Function to get data and print charts
 function getData() {
     // get dat from all input elements
     const status = document.getElementById('data-status').value;
     const country = document.getElementById('data-country').value;
-
     
     // show spinner before load data 
     let showSpinner = document.getElementById('show-spinner');
     showSpinner.classList.add('spinner-4');
-    setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );
-
-    
+    setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );  
 
     // Chart by Country - Status - This chart should be used as History
     // Status Recovered was depreciated
@@ -55,8 +31,7 @@ function getData() {
         let fInit = document.getElementById('data-initial-date').value;
         let fFinal = document.getElementById('data-final-date').value;
         
-        // Filtra solo las fechas indicadas
-        
+        // Filtra solo las fechas indicadas   
         for ( const [nDate, nValue] of Object.entries(datesList) ) {
             if (fInit <= `${nDate}` && fFinal>= `${nDate}`){
                 dateList.push (`${nDate}`)
@@ -64,8 +39,8 @@ function getData() {
             }
         }
         
-        const graficaStatus = document.querySelector("#myChart2");
-        const etiquetas = dateList;
+        const chartStatus = document.querySelector("#myChart2");
+        const chartLabels = dateList;
         
         const defineStatus = {
                 label: status,
@@ -88,20 +63,18 @@ function getData() {
                 'rgb(153, 102, 255)',
                 'rgb(201, 203, 207)'
                 ],
-                //backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                //borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
         };
 
-        if ( grafica2 ) {
-            grafica2.clear();
-            grafica2.destroy();
+        if ( secondChart ) {
+             secondChart.clear();
+             secondChart.destroy();
         }
         
-        grafica2 = new Chart(graficaStatus, {
+        secondChart = new Chart(chartStatus, {
             type: 'bar',// Tipo de gráfica
             data: {
-                labels: etiquetas,
+                labels: chartLabels,
                 datasets: [
                     defineStatus,
                 ]
@@ -111,11 +84,6 @@ function getData() {
                     y :{
                             beginAtZero: false
                     }
-                    /*yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }],*/
                 },
             }
         });
@@ -144,13 +112,13 @@ function getData() {
             }
         }
 
-        console.log('State ' + stateList)
-        console.log('Confirmed ' + confirmedList)
-        console.log('Deaths ' + deathsList)
-        console.log('Recovered ' + recoveredList)
+        //console.log('State ' + stateList)
+        //console.log('Confirmed ' + confirmedList)
+        //console.log('Deaths ' + deathsList)
+        //console.log('Recovered ' + recoveredList)
 
-        const graficaStatus = document.querySelector("#myChart3");
-        const etiquetas = stateList;
+        const chartStatus = document.querySelector("#myChart3");
+        const chartLabels = stateList;
         
         const defineStatus = {
                 label: status,
@@ -172,8 +140,6 @@ function getData() {
                 'rgb(153, 102, 255)',
                 'rgb(201, 203, 207)'
                 ],
-                //backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                //borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
         };
 
@@ -187,9 +153,9 @@ function getData() {
             grey: 'rgb(201, 203, 207)'
         };
 
-        if ( grafica3 ) {
-            grafica3.clear();
-            grafica3.destroy();
+        if ( thirdChart ) {
+             thirdChart.clear();
+             thirdChart.destroy();
         }
         
         const data = {
@@ -213,7 +179,7 @@ function getData() {
             ]
         };
 
-        grafica3 = new Chart(graficaStatus, {
+        thirdChart = new Chart(chartStatus, {
             type: 'bar',// Tipo de gráfica
             data: data,
             options: {
@@ -221,11 +187,6 @@ function getData() {
                     y :{
                             beginAtZero: false
                     }
-                    /*yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }],*/
                 },
             }
         });
@@ -289,12 +250,12 @@ function getData() {
             },
         };
 
-        if (grafica1){
-            grafica1.clear();
-            grafica1.destroy();
+        if ( firstChart ) {
+             firstChart.clear();
+             firstChart.destroy();
         }
      
-        grafica1 = new Chart(
+        firstChart = new Chart(
             document.getElementById('myChart'),
             config
         ); 
@@ -322,26 +283,25 @@ function addOptions() {
     })
 }
 
-function dateFortmat() {
+function dateFormat(days = 0) {
     const tDate = new Date();
-    let dd = tDate.getDate();
+    let dd = tDate.getDate() - days;
     let mm = tDate.getMonth() + 1;
     const yyyy = tDate.getFullYear();
 
-    if(mm<=9) {
-        mm = "0" + mm
+    if ( mm <= 9 ) {
+         mm = "0" + mm
     }
-    if(dd<=9) {
-        dd = "0" + dd
+    if ( dd <= 9 ) {
+         dd = "0" + dd
     }
     return yyyy + "-" + mm + "-" + dd
 }
 
-let fecha = dateFortmat()
-
 let dInitial = document.getElementById('data-initial-date');
-dInitial.value = fecha;
-let dFinal = document.getElementById('data-final-date');
-dFinal.value = fecha;
-addOptions();
+dInitial.value = dateFormat(1);
 
+let dFinal = document.getElementById('data-final-date');
+dFinal.value = dateFormat(0);
+
+addOptions();
