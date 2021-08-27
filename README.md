@@ -8,7 +8,8 @@
 * [2. Back End](#2-Back)
 * [3. Front End](#3-Front)
 * [4. Operation](#4-Operation)
-* [5. Parnerts](#5-Partners)
+* [5. Demo Screenshot](#5-Demo)
+* [6. Parnerts](#6-Partners)
 
 
 ## 1. Intro
@@ -50,7 +51,7 @@ Para este proyecto se utiliza la API de COVID-19, Aquí puede ver la descripció
     - [] Agregar el archivo .env para que la configuración pueda ser parseada y leída
 
     
-## Front End
+## 3. Front End
 
 1. Generar carpeta front
 2. Crear archivo app.js
@@ -70,7 +71,7 @@ Para este proyecto se utiliza la API de COVID-19, Aquí puede ver la descripció
     - [] Agregar estilos para la forma y spinner
 
 
-## Operation
+## 4. Operation
 
 1. Por default se mostrarán los datos de México
     - [] Datos generales del país
@@ -81,12 +82,17 @@ Para este proyecto se utiliza la API de COVID-19, Aquí puede ver la descripció
 3. En caso de no llenar los campos de Fecha Inicial y Fecha Final entonces se toman los últimos quince días,
    Es decir se toma como Fecha Final el día actual y como Fecha Inicial el día actual menos 15 días.
 
-## Partners
+## 5. Demo-Screenshot
+
+Muestra del resultado de la consulta a través del API COVID-19
+![imagen](./imagenes/imageDemo.png)
+
+## 6. Partners
 
 - [] Team 2
     - [] Carolina Pérez
     - [] Itzel Angélica Ibañez Miranda
-    - [] Alan José Abarca Velazquez
+    - [] Alan José Abarca Velázquez
     - [] Alberto Miranda Pacheco
     - [] Gerardo Paxtian Torres
     - [] Jorge Angel Novoa
