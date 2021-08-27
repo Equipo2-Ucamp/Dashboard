@@ -207,9 +207,9 @@ function getData() {
          
         const CHART_COLORS = {
             red: 'rgb(255, 99, 132)',
-            purple: 'rgb(153, 102, 255)',
             blue: 'rgb(54, 162, 235)',
             green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
+            purple: 'rgb(153, 102, 255)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
             grey: 'rgb(201, 203, 207)'
@@ -217,14 +217,12 @@ function getData() {
            
         const data = {
             labels: [ 'People Not Vaccinated',
-                      'Administered',
                       'People Partially Vaccined',
                       'People Vaccinated' ],
             datasets: [
                 {
                 label: 'Dataset 1',
                 data: [ people_not_vaccinated,
-                        administered,
                         people_partially_vaccinated,
                         people_vaccinated ],
                 backgroundColor: Object.values(CHART_COLORS),
@@ -243,8 +241,7 @@ function getData() {
                     },
                     title: {
                             display: true,
-                            text: `Vaccines COVID-19
-                             Population ${population}`
+                            text: `Vaccines COVID-19    Population ${population}    Administered ${administered}`
                     }
                 }
             },
