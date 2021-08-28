@@ -81,8 +81,16 @@ function getData() {
             },
             options: {
                 scales: {
-                    y :{
-                            beginAtZero: false
+                    x: {
+                        grid: {
+                            borderColor: 'black'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            borderColor: 'black'
+                        }
                     }
                 },
             }
@@ -180,12 +188,20 @@ function getData() {
         };
 
         thirdChart = new Chart(chartStatus, {
-            type: 'bar',// Tipo de gráfica
+            type: 'line',// Tipo de gráfica
             data: data,
             options: {
                 scales: {
-                    y :{
-                            beginAtZero: false
+                    y: {
+                        grid:{
+                            borderColor: 'black'
+                        },
+                        beginAtZero: false,
+                    },
+                    x: {
+                        grid:{
+                            borderColor: 'black'
+                        }
                     }
                 },
             }

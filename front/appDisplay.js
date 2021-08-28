@@ -81,8 +81,16 @@ function getData() {
             },
             options: {
                 scales: {
-                    y :{
-                            beginAtZero: false
+                    x: {
+                        grid: {
+                            borderColor: 'black'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            borderColor: 'black'
+                        }
                     }
                 },
             }
@@ -185,7 +193,15 @@ function getData() {
             options: {
                 scales: {
                     y :{
-                            beginAtZero: false
+                        grid:{
+                            borderColor: 'black'
+                        },
+                            beginAtZero: false,
+                    },
+                    x: {
+                        grid:{
+                            borderColor: 'black'
+                        }
                     }
                 },
             }
