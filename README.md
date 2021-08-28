@@ -92,8 +92,12 @@ Para este proyecto se utiliza la API de COVID-19, Aquí puede ver la descripció
 
 ## 5. Demo
 
-Muestra del resultado de la consulta a través del API COVID-19
+Muestra Pantalla inicial con los campos a requisitar para poder realizar la consulta
 ![imagen](./imagenes/imageDemo.png)
+
+Muestra del resultado de la consulta a través del API COVID-19
+![imagen](./imagenes/imageDempEject.png)
+
 
 ## 6. Partners
 

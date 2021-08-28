@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../imagenes/charts_color.png">
+    <link rel="shortcut icon" href="../imagenes/diagrama.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">    
     <title>Stats COVID-19</title>
@@ -14,8 +14,8 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="../imagenes/charts_color.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                        <h1>Dashboard using API: Covid-19-API</h1>
+                        <img src="../imagenes/diagrama.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                        <h1 class="header-title">Dashboard using API: Covid-19-API</h1>
                     </a>
                 </div>
             </nav>
@@ -97,34 +97,74 @@
                     </div>
             </div>
         </div>
-        <br>
-        <br>
-        <footer class="page-footer font-small bg-dark text-light bg-dark">
+        <br />
+        <br />
+
+        <footer class="page-footer font-small bg-dark text-light bg-dark" id="profooter">
             <div class="footer-copyright text-center py-3">
                 <div class="columns">
-                    <div class="column is-one-fifth">
-                        <h1>Participantes:</h1> 
-                    </div>
-                    <div class="column is-one-quarter">
-                        <li><a href="#">Carolina Pérez</a></li>
-                        <li><a href="https://github.com/itzibam">Itzel Angélica Ibañez Miranda</a></li>
-                        <li><a href="https://github.com/aabarca7">Alan José Abarca Velázquez</a></li>
-                        <li><a href="https://github.com/Albert-29">Alberto Miranda Pacheco</a></li>
-                        <li><a href="https://github.com/Angel25Novoa">Jorge Angel Novoa</a></li>
-                        <li><a href="https://github.com/Omar-ROrozco">Omar Rodrigo Orozco Camarena</a></li>
-                        <li><a href="#">Martín Barrera</a></li>
-                        <li><a href="#">Raúl Eduardo Trejo Suárez</a></li>
-                        <li><a href="https://github.com/gerpaxbc" target="_blank">Gerardo Paxtian Torres</a></li>
-                        <li><a href="https://github.com/jantoniosalinas">José Antonio Salinas Ochoa</a></li>
-                    </div>
-                    <div class="column is-one-fifth">
-                        <h1>Datos obtenidos desde:</h1> 
-                        <a href ="https://covid-api.mmediagroup.fr/v1/cases?country=" target="_blank">https://covid-api.mmediagroup.fr/v1/cases?country=</a>
-                    </div>
-                    <div class="column column is-one-fifth">
-                        <li>Proyecto 3</li>
+                    <div class="partners column is-one-third">
+                        <h1 class="titleColumbs">Participantes:</h1> 
                         <li>
-                           <h1>Tablero de Datos ("Dashboard")</h1>
+                            <a href="https://github.com/CaroPrez" class="text-success">Carolina Pérez</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/itzibam" class="text-success">Itzel Angélica Ibañez Miranda</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/aabarca7" class="text-success">Alan José Abarca Velázquez</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Albert-29" class="text-success">Alberto Miranda Pacheco</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Angel25Novoa" class="text-success">Jorge Angel Novoa</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Omar-ROrozco" class="text-success">Omar Rodrigo Orozco Camarena</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-success">Martín Barrera</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-success">Raúl Eduardo Trejo Suárez</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/gerpaxbc" target="_blank" class="text-success">Gerardo Paxtian Torres</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jantoniosalinas" class="text-success">José Antonio Salinas Ochoa</a>
+                        </li>
+                    </div>
+                    <div class="column is-one-third">
+                        <h2 class="titleColumbs">Proyecto 3</h2>
+                        <br />
+                        <strong>Tablero de Datos</strong>
+                        <br />
+                        <strong>"Dashboard"</strong>
+                        <br /> 
+                        <img src="../imagenes/diagrama.svg" width="110px" height="110px">
+                    </div>
+                    <div class="column column is-one-third">
+                        <h1 class="titleColumbs">Datos obtenidos desde:</h1>
+                        <br /> 
+                        <li>
+                            <a href ="https://covid-api.mmediagroup.fr/v1/cases?country=" target="_blank" class="text-success">https://covid-api.mmediagroup.fr/v1/cases?country=</a>
+                        </li>
+                        <li>
+                            <a href ="https://datos.covid-19.conacyt.mx/" target="_blank" class="text-success">https://datos.covid-19.conacyt.mx/</a>
+                        </li>
+                        <li>
+                            <a href ="https://www.who.int/es" target="_blank"class="text-success">https://www.who.int/es</a>
+                        </li>
+                        <br />
+                        <h1>Frameworks</h1>
+                        <br />
+                        <li>
+                            <a href ="https://bulma.io" target="_blank" class="text-success">https://bulma.io</a>
+                        </li>
+                        <li>
+                            <a href ="https://getbootstrap.com" target="_blank" class="text-success">https://getbootstrap.com</a>
                         </li>
                     </div>
                 </div>

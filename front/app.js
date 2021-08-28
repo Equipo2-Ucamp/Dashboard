@@ -7,8 +7,8 @@ function getData() {
     const country = document.getElementById('data-country').value;
     
     let showSpinner = document.getElementById('show-spinner');
-    showSpinner.classList.add('spinner-4');
-    setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );  
+    showSpinner.classList.add('spinner');
+    setTimeout( () => showSpinner.classList.remove('spinner'), 5000 );  
 
     if ( status.length < 1 )
          status = 'Confirmed';
@@ -261,8 +261,8 @@ function addOptions() {
     let optionsList = '';
     
     let showSpinnerInitial = document.getElementById('show-spinner-initial');
-    showSpinnerInitial.classList.add('spinner-4');
-    setTimeout( () => showSpinnerInitial.classList.remove('spinner-4'), 700 );
+    showSpinnerInitial.classList.add('spinner');
+    setTimeout( () => showSpinnerInitial.classList.remove('spinner'), 700 );
 
     fetch('http://localhost:3000/hist?country=&status=Confirmed')    
     .then( function (response) {
