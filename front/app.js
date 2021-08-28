@@ -2,23 +2,17 @@ let firstChart = '';
 let secondChart = '';
 let thirdChart = '';
 
-// Function to get data and print charts
 function getData() {
-    // get dat from all input elements
     const status = document.getElementById('data-status').value;
     const country = document.getElementById('data-country').value;
     
-    // show spinner before load data 
     let showSpinner = document.getElementById('show-spinner');
     showSpinner.classList.add('spinner-4');
     setTimeout( () => showSpinner.classList.remove('spinner-4'), 5000 );  
 
-    // Chart by Country - Status - This chart should be used as History
-    // Status Recovered was depreciated
     if ( status.length < 1 )
          status = 'Confirmed';
 
-    // console.log('http://localhost:3000/hist?country=' + country+'&status='+ status); 
     fetch('http://localhost:3000/hist?country=' + country+'&status='+ status)
     .then( (response) => {
         return response.json();
@@ -31,12 +25,11 @@ function getData() {
         let fInit = document.getElementById('data-initial-date').value;
         let fFinal = document.getElementById('data-final-date').value;
         
-        // Filtra solo las fechas indicadas   
         for ( const [nDate, nValue] of Object.entries(datesList) ) {
-            if (fInit <= `${nDate}` && fFinal>= `${nDate}`){
-                dateList.push (`${nDate}`)
-                valueList.push (`${nValue}`)
-            }
+              if ( fInit <= `${nDate}` && fFinal>= `${nDate}` ) {
+                   dateList.push(`${nDate}`);
+                   valueList.push(`${nValue}`);
+              }
         }
         
         const chartStatus = document.querySelector("#myChart2");
@@ -72,7 +65,7 @@ function getData() {
         }
         
         secondChart = new Chart(chartStatus, {
-            type: 'bar',// Tipo de gráfica
+            type: 'bar',
             data: {
                 labels: chartLabels,
                 datasets: [
@@ -97,8 +90,6 @@ function getData() {
         });
     })  
 
-    // Chart per Country
-    // console.log('http://localhost:3000/stats?country=' + country) 
     fetch('http://localhost:3000/stats?country=' + country)
     .then( (response) => {
         return response.json();
@@ -109,21 +100,14 @@ function getData() {
         let confirmedList = [];
         let deathsList = [];
         
-        // Filtra solo las fechas indicadas
-        // console.log(dataHist)
         for ( const [nState, nRecovered] of Object.entries(dataHist) ) {
-            if(`${nState}` !== 'All'){
-                stateList.push (`${nState}`)
-                recoveredList.push (`${nRecovered.recovered}`)
-                confirmedList.push (`${nRecovered.confirmed}`)
-                deathsList.push (`${nRecovered.deaths}`)
-            }
+              if ( `${nState}` !== 'All' ) {
+                   stateList.push(`${nState}`);
+                   recoveredList.push(`${nRecovered.recovered}`);
+                   confirmedList.push(`${nRecovered.confirmed}`);
+                   deathsList.push(`${nRecovered.deaths}`);
+              }
         }
-
-        //console.log('State ' + stateList)
-        //console.log('Confirmed ' + confirmedList)
-        //console.log('Deaths ' + deathsList)
-        //console.log('Recovered ' + recoveredList)
 
         const chartStatus = document.querySelector("#myChart3");
         const chartLabels = stateList;
@@ -155,7 +139,7 @@ function getData() {
             red: 'rgb(255, 99, 132)',
             purple: 'rgb(153, 102, 255)',
             blue: 'rgb(54, 162, 235)',
-            green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
+            green: 'rgb(218, 247, 166)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
             grey: 'rgb(201, 203, 207)'
@@ -168,27 +152,30 @@ function getData() {
         
         const data = {
             labels: stateList,
-            datasets: [{
-                label: 'Confirmed',
-                backgroundColor: '#42a5f5',
-                borderColor: 'gray',
-                data:confirmedList,
-            },{
-                label: 'Recovered',
-                backgroundColor: 'green',
-                borderColor: 'green',
-                data: recoveredList,
-            },{
-                label: 'Deaths',
-                backgroundColor: '#ffab91',
-                borderColor: 'yellow',
-                data: deathsList,
-            }			
+            datasets: [
+                {
+                    label: 'Confirmed',
+                    backgroundColor: '#42a5f5',
+                    borderColor: 'gray',
+                    data:confirmedList,
+                },
+                {
+                    label: 'Recovered',
+                    backgroundColor: 'green',
+                    borderColor: 'green',
+                    data: recoveredList,
+                },
+                {
+                    label: 'Deaths',
+                    backgroundColor: '#ffab91',
+                    borderColor: 'yellow',
+                    data: deathsList,
+                }
             ]
         };
 
         thirdChart = new Chart(chartStatus, {
-            type: 'line',// Tipo de gráfica
+            type: 'line',
             data: data,
             options: {
                 scales: {
@@ -206,25 +193,20 @@ function getData() {
                 },
             }
         });
-
     })
     
-    // Chart of Vaccines per Country
-    // console.log('http://localhost:3000/vac?country=' + country);
     fetch('http://localhost:3000/vac?country=' + country)
     .then(function (response) {
         return response.json();
     })
     .then(function (dataVaccine) {
-        // Here put logic to parse data and get Vaccines chart
-        //console.log(dataVaccine);
         const { administered, people_partially_vaccinated, people_vaccinated, population } = dataVaccine.All;
         let people_not_vaccinated = population*1 - people_partially_vaccinated*1 - people_vaccinated;
          
         const CHART_COLORS = {
             red: 'rgb(255, 99, 132)',
             blue: 'rgb(54, 162, 235)',
-            green: 'rgb(218, 247, 166)',//'rgb(75, 192, 192)',
+            green: 'rgb(218, 247, 166)',
             purple: 'rgb(153, 102, 255)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
@@ -237,11 +219,11 @@ function getData() {
                       'People Vaccinated' ],
             datasets: [
                 {
-                label: 'Dataset 1',
-                data: [ people_not_vaccinated,
-                        people_partially_vaccinated,
-                        people_vaccinated ],
-                backgroundColor: Object.values(CHART_COLORS),
+                    label: 'Dataset 1',
+                    data: [ people_not_vaccinated,
+                            people_partially_vaccinated,
+                            people_vaccinated ],
+                    backgroundColor: Object.values(CHART_COLORS),
                 }
             ]
         };
@@ -272,7 +254,6 @@ function getData() {
             document.getElementById('myChart'),
             config
         ); 
-        //---
     })
 }
 
@@ -288,11 +269,11 @@ function addOptions() {
         return response.json();
     })
     .then( function (data) {
-        const container = document.querySelector('#data-country')
+        const container = document.querySelector('#data-country');
         for ( const [country] of Object.entries(data) ) {
-              optionsList += `<option>${country}</option>`
+              optionsList += `<option>${country}</option>`;
         }
-        container.innerHTML += optionsList
+        container.innerHTML += optionsList;
     })
 }
 
@@ -303,12 +284,12 @@ function dateFormat(days = 0) {
     const yyyy = tDate.getFullYear();
 
     if ( mm <= 9 ) {
-         mm = "0" + mm
+         mm = "0" + mm;
     }
     if ( dd <= 9 ) {
-         dd = "0" + dd
+         dd = "0" + dd;
     }
-    return yyyy + "-" + mm + "-" + dd
+    return yyyy + "-" + mm + "-" + dd;
 }
 
 let dInitial = document.getElementById('data-initial-date');

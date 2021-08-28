@@ -10,12 +10,6 @@ const port = process.env.PORT;
 const apiBaseUrl = process.env.API_BASE_URL;
 const apiUrl = process.env.API_URL;
 
-// Search data in these urls
-//url = 'https://covid-api.mmediagroup.fr/v1/cases?country=Mexico';
-//url = 'https://covid-api.mmediagroup.fr/v1/history?country=Mexico&status=recovered';
-//url = 'https://covid-api.mmediagroup.fr/v1/vaccines?country=Mexico';
-
-// Build URL, according with type
 const buildGetDataCOVID19 = function ( apiBaseUrl, apiUrl, type ) {
     switch ( type ) {
       case 1:
@@ -32,21 +26,14 @@ const buildGetDataCOVID19 = function ( apiBaseUrl, apiUrl, type ) {
     }
 }
 
-// Get URL, according with type
 const url = buildGetDataCOVID19( apiBaseUrl, apiUrl, 1 );
 const urlHistory = buildGetDataCOVID19( apiBaseUrl, apiUrl, 2 );
 const urlVaccines = buildGetDataCOVID19( apiBaseUrl, apiUrl, 3 );
-// Define object params ; params is use for Coutry and Vaccines
+
 const params = {};
 const paramsHist = {};
 const paramsVaccines = {};
 
-// Print URL in order to verify url built
-console.log("Url = "+url);
-console.log("Url History= "+urlHistory);
-console.log("Url Vaccines = "+urlVaccines);
-
-// Function to get data from  'https://covid-api.mmediagroup.fr/v1/cases?country=Mexico'
 app.get('/stats', async (req, res) => {
   const { country } = req.query
   params.country = country;
@@ -67,7 +54,6 @@ app.get('/stats', async (req, res) => {
   }
 })
 
-// Function to get data from  'https://covid-api.mmediagroup.fr/v1/history?country=Mexico&status=recovered'
 app.get('/hist', async (req, res) => {
   const { country, status, initialDate, finalDate } = req.query
   paramsHist.country = country;
@@ -90,7 +76,6 @@ app.get('/hist', async (req, res) => {
   }
 })
 
-// Function to get data from 'https://covid-api.mmediagroup.fr/v1/vaccines?country=Mexico'
 app.get('/vac', async (req, res) => {
   const { country } = req.query
   paramsVaccines.country = country;

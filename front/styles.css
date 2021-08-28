@@ -2,9 +2,6 @@
 
 body {
   padding: 10px;
-  /* background: #1CD8D2; /* fallback for old browsers 
-  background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2); /* Chrome 10-25, Safari 5.1-6 
-  background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 } 
 
 li{
@@ -12,7 +9,6 @@ li{
   list-style: none;
   padding: 5px;
 }
-
 
 h1{ 
   text-align: center;  
@@ -39,4 +35,9 @@ h1{
     to {
        transform: rotate(1turn)
     }
+}
+
+input {
+  border-radius: 5px;
+  padding: 7px;
 }
